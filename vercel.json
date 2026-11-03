@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/lab/wireframe-kit", "destination": "/" },
+    { "source": "/lab/wireframe-kit/:path*", "destination": "/:path*" }
+  ]
+}
