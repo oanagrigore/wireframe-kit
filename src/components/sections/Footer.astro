@@ -1,0 +1,215 @@
+---
+/**
+ * Footer — 5 layouts.
+ *   columns          Columns
+ *   simple           Simple
+ *   centered         Centered
+ *   newsletter       Newsletter
+ *   big              Big wordmark
+ *
+ * Props: variant, tone ('base' | 'muted' | 'primary').
+ * Styles come from src/styles/wireframe.css and the tokens on the parent .wf element.
+ */
+export type FooterVariant = 'columns' | 'simple' | 'centered' | 'newsletter' | 'big';
+interface Props {
+  variant?: FooterVariant;
+  tone?: 'base' | 'muted' | 'primary';
+}
+const { variant = 'columns', tone = 'base' } = Astro.props;
+---
+<footer class:list={['wf-sec', 'wf-footer', tone !== 'base' && `tone-${tone}`]} data-type="footer" data-variant={variant}>
+  {variant === 'columns' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-fcols">
+          <div class="wf-stack" style="gap:14px;max-width:300px">
+            <a class="wf-logo" href="#">
+              <span class="wf-mark">
+              </span>Brand</a>
+              <p class="wf-small wf-muted">One line describing what the company does and for whom.</p>
+            </div>
+            <div>
+              <h4>Product</h4>
+              <ul>
+                <li>
+                  <a href="#">Features</a>
+                </li>
+                <li>
+                  <a href="#">Pricing</a>
+                </li>
+                <li>
+                  <a href="#">Changelog</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4>Company</h4>
+              <ul>
+                <li>
+                  <a href="#">About</a>
+                </li>
+                <li>
+                  <a href="#">Work</a>
+                </li>
+                <li>
+                  <a href="#">Contact</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4>Resources</h4>
+              <ul>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Guides</a>
+                </li>
+                <li>
+                  <a href="#">Help center</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="wf-fbottom">
+            <span>© 2026 Brand. All rights reserved.</span>
+            <span>Privacy · Terms</span>
+          </div>
+        </div>
+    </Fragment>
+  )}
+  {variant === 'simple' && (
+    <Fragment>
+      <div class="wf-in wf-fsimple">
+        <a class="wf-logo" href="#">
+          <span class="wf-mark">
+          </span>Brand</a>
+          <nav class="wf-links" style="display:flex;flex-wrap:wrap;gap:20px">
+            <a href="#">Product</a>
+            <a href="#">Pricing</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+          </nav>
+          <span class="wf-small wf-muted">© 2026 Brand</span>
+        </div>
+    </Fragment>
+  )}
+  {variant === 'centered' && (
+    <Fragment>
+      <div class="wf-in wf-fcenter">
+        <a class="wf-logo" href="#">
+          <span class="wf-mark">
+          </span>Brand</a>
+          <p class="wf-small wf-muted" style="max-width:44ch">One line describing what the company does and for whom.</p>
+          <nav class="wf-links" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px 24px">
+            <a href="#">Product</a>
+            <a href="#">Pricing</a>
+            <a href="#">Work</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+          </nav>
+          <div class="wf-socials" aria-label="Social links">
+            <span>
+            </span>
+            <span>
+            </span>
+            <span>
+            </span>
+            <span>
+            </span>
+          </div>
+          <span class="wf-small wf-muted">© 2026 Brand. All rights reserved.</span>
+        </div>
+    </Fragment>
+  )}
+  {variant === 'newsletter' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-ftop">
+          <div class="wf-stack" style="gap:8px;max-width:420px">
+            <h3>Stay in the loop</h3>
+            <p class="wf-muted wf-small">Monthly notes on what we shipped and what we learned.</p>
+          </div>
+          <div class="wf-form">
+            <div class="wf-input">Work email</div>
+            <a class="wf-btn" href="#">Subscribe</a>
+          </div>
+        </div>
+        <div class="wf-fcols">
+          <div class="wf-stack" style="gap:14px;max-width:300px">
+            <a class="wf-logo" href="#">
+              <span class="wf-mark">
+              </span>Brand</a>
+              <p class="wf-small wf-muted">One line describing what the company does and for whom.</p>
+            </div>
+            <div>
+              <h4>Product</h4>
+              <ul>
+                <li>
+                  <a href="#">Features</a>
+                </li>
+                <li>
+                  <a href="#">Pricing</a>
+                </li>
+                <li>
+                  <a href="#">Changelog</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4>Company</h4>
+              <ul>
+                <li>
+                  <a href="#">About</a>
+                </li>
+                <li>
+                  <a href="#">Work</a>
+                </li>
+                <li>
+                  <a href="#">Contact</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4>Resources</h4>
+              <ul>
+                <li>
+                  <a href="#">Blog</a>
+                </li>
+                <li>
+                  <a href="#">Guides</a>
+                </li>
+                <li>
+                  <a href="#">Help center</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="wf-fbottom">
+            <span>© 2026 Brand. All rights reserved.</span>
+            <span>Privacy · Terms</span>
+          </div>
+        </div>
+    </Fragment>
+  )}
+  {variant === 'big' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-ftop">
+          <h2 style="max-width:16ch">Closing line that invites a conversation</h2>
+          <a class="wf-btn" href="#">Start a project</a>
+        </div>
+        <div class="wf-fsimple">
+          <nav class="wf-links" style="display:flex;flex-wrap:wrap;gap:12px 24px">
+            <a href="#">Work</a>
+            <a href="#">Services</a>
+            <a href="#">Pricing</a>
+            <a href="#">Contact</a>
+          </nav>
+          <span class="wf-small wf-muted">hello@brand.com · © 2026</span>
+        </div>
+        <div class="wf-wordmark" aria-hidden="true">Brand</div>
+      </div>
+    </Fragment>
+  )}
+</footer>

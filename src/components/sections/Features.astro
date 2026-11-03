@@ -1,0 +1,351 @@
+---
+/**
+ * Features — 8 layouts.
+ *   grid-3           3-column cards
+ *   grid-2           2-column cards
+ *   icons-4          4 icons, no cards
+ *   bento            Bento
+ *   list             Icon list
+ *   zigzag           Alternating rows
+ *   steps            Steps
+ *   tabs             Tabs
+ *
+ * Props: variant, tone ('base' | 'muted' | 'primary').
+ * Styles come from src/styles/wireframe.css and the tokens on the parent .wf element.
+ */
+export type FeaturesVariant = 'grid-3' | 'grid-2' | 'icons-4' | 'bento' | 'list' | 'zigzag' | 'steps' | 'tabs';
+interface Props {
+  variant?: FeaturesVariant;
+  tone?: 'base' | 'muted' | 'primary';
+}
+const { variant = 'grid-3', tone = 'base' } = Astro.props;
+---
+<section class:list={['wf-sec', tone !== 'base' && `tone-${tone}`]} data-type="features" data-variant={variant}>
+  {variant === 'grid-3' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Features</span>
+          <h2>Section headline that groups the benefits</h2>
+          <p class="wf-lead">A sentence that tells the reader why these belong together.</p>
+        </div>
+        <div class="wf-grid c3">
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Faster setup</h3>
+            <p class="wf-muted">Describe the result first, then the feature that makes it possible.</p>
+          </div>
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Fewer handoffs</h3>
+            <p class="wf-muted">One sentence on the problem this removes from the customer’s week.</p>
+          </div>
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Clear reporting</h3>
+            <p class="wf-muted">Name the decision this helps them make, not the chart it shows.</p>
+          </div>
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Works with your stack</h3>
+            <p class="wf-muted">List the two or three integrations your buyers ask about most.</p>
+          </div>
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Built for teams</h3>
+            <p class="wf-muted">Who uses it day to day, and what changes for their manager.</p>
+          </div>
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Secure by default</h3>
+            <p class="wf-muted">The proof point procurement looks for: a standard, a certification.</p>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'grid-2' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Features</span>
+          <h2>Section headline that groups the benefits</h2>
+          <p class="wf-lead">A sentence that tells the reader why these belong together.</p>
+        </div>
+        <div class="wf-grid c2">
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Faster setup</h3>
+            <p class="wf-muted">Describe the result first, then the feature that makes it possible.</p>
+          </div>
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Fewer handoffs</h3>
+            <p class="wf-muted">One sentence on the problem this removes from the customer’s week.</p>
+          </div>
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Clear reporting</h3>
+            <p class="wf-muted">Name the decision this helps them make, not the chart it shows.</p>
+          </div>
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Works with your stack</h3>
+            <p class="wf-muted">List the two or three integrations your buyers ask about most.</p>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'icons-4' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Features</span>
+          <h2>Section headline that groups the benefits</h2>
+          <p class="wf-lead">A sentence that tells the reader why these belong together.</p>
+        </div>
+        <div class="wf-grid c4">
+          <div class="wf-iconitem">
+            <span class="wf-icon">
+            </span>
+            <h3>Faster setup</h3>
+            <p class="wf-muted">Describe the result first, then the feature that makes it possible.</p>
+          </div>
+          <div class="wf-iconitem">
+            <span class="wf-icon">
+            </span>
+            <h3>Fewer handoffs</h3>
+            <p class="wf-muted">One sentence on the problem this removes from the customer’s week.</p>
+          </div>
+          <div class="wf-iconitem">
+            <span class="wf-icon">
+            </span>
+            <h3>Clear reporting</h3>
+            <p class="wf-muted">Name the decision this helps them make, not the chart it shows.</p>
+          </div>
+          <div class="wf-iconitem">
+            <span class="wf-icon">
+            </span>
+            <h3>Works with your stack</h3>
+            <p class="wf-muted">List the two or three integrations your buyers ask about most.</p>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'bento' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head">
+          <span class="wf-eyebrow">Features</span>
+          <h2>Section headline that groups the benefits</h2>
+          <p class="wf-lead">Lead with the biggest benefit in the widest tile.</p>
+        </div>
+        <div class="wf-bento">
+          <div class="wf-card span2">
+            <h3>Faster setup</h3>
+            <p class="wf-muted">Describe the result first, then the feature that makes it possible.</p>
+            <div class="wf-img" role="img" aria-label="Feature image">
+            </div>
+          </div>
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Fewer handoffs</h3>
+            <p class="wf-muted">One sentence on the problem this removes from the customer’s week.</p>
+          </div>
+          <div class="wf-card">
+            <span class="wf-icon">
+            </span>
+            <h3>Clear reporting</h3>
+            <p class="wf-muted">Name the decision this helps them make, not the chart it shows.</p>
+          </div>
+          <div class="wf-card span2">
+            <h3>Works with your stack</h3>
+            <p class="wf-muted">List the two or three integrations your buyers ask about most.</p>
+            <div class="wf-img" role="img" aria-label="Feature image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'list' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head">
+          <span class="wf-eyebrow">Features</span>
+          <h2>Section headline that groups the benefits</h2>
+          <p class="wf-lead">A sentence that tells the reader why these belong together.</p>
+        </div>
+        <ul class="wf-flist">
+          <li>
+            <span class="wf-icon">
+            </span>
+            <div>
+              <h3>Faster setup</h3>
+              <p class="wf-muted">Describe the result first, then the feature that makes it possible.</p>
+            </div>
+          </li>
+          <li>
+            <span class="wf-icon">
+            </span>
+            <div>
+              <h3>Fewer handoffs</h3>
+              <p class="wf-muted">One sentence on the problem this removes from the customer’s week.</p>
+            </div>
+          </li>
+          <li>
+            <span class="wf-icon">
+            </span>
+            <div>
+              <h3>Clear reporting</h3>
+              <p class="wf-muted">Name the decision this helps them make, not the chart it shows.</p>
+            </div>
+          </li>
+          <li>
+            <span class="wf-icon">
+            </span>
+            <div>
+              <h3>Works with your stack</h3>
+              <p class="wf-muted">List the two or three integrations your buyers ask about most.</p>
+            </div>
+          </li>
+          <li>
+            <span class="wf-icon">
+            </span>
+            <div>
+              <h3>Built for teams</h3>
+              <p class="wf-muted">Who uses it day to day, and what changes for their manager.</p>
+            </div>
+          </li>
+          <li>
+            <span class="wf-icon">
+            </span>
+            <div>
+              <h3>Secure by default</h3>
+              <p class="wf-muted">The proof point procurement looks for: a standard, a certification.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'zigzag' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Features</span>
+          <h2>Section headline that groups the benefits</h2>
+        </div>
+        <div class="wf-zig">
+          <div class="wf-split">
+            <div class="wf-img" role="img" aria-label="Feature image">
+            </div>
+            <div class="wf-stack">
+              <h3>Faster setup</h3>
+              <p class="wf-lead">Describe the result first, then the feature that makes it possible.</p>
+              <ul class="wf-checks">
+                <li>Supporting detail</li>
+                <li>Supporting detail</li>
+              </ul>
+            </div>
+          </div>
+          <div class="wf-split rev">
+            <div class="wf-img" role="img" aria-label="Feature image">
+            </div>
+            <div class="wf-stack">
+              <h3>Fewer handoffs</h3>
+              <p class="wf-lead">One sentence on the problem this removes from the customer’s week.</p>
+              <ul class="wf-checks">
+                <li>Supporting detail</li>
+                <li>Supporting detail</li>
+              </ul>
+            </div>
+          </div>
+          <div class="wf-split">
+            <div class="wf-img" role="img" aria-label="Feature image">
+            </div>
+            <div class="wf-stack">
+              <h3>Clear reporting</h3>
+              <p class="wf-lead">Name the decision this helps them make, not the chart it shows.</p>
+              <ul class="wf-checks">
+                <li>Supporting detail</li>
+                <li>Supporting detail</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'steps' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">How it works</span>
+          <h2>Three steps from first call to first delivery</h2>
+        </div>
+        <ol class="wf-grid c3">
+          <li class="wf-step">
+            <span class="wf-step-n">1</span>
+            <h3>Book a call</h3>
+            <p class="wf-muted">Share a short brief about the goal, audience and deadline.</p>
+          </li>
+          <li class="wf-step">
+            <span class="wf-step-n">2</span>
+            <h3>Get a plan</h3>
+            <p class="wf-muted">We reply with scope, timeline and the team you’ll work with.</p>
+          </li>
+          <li class="wf-step">
+            <span class="wf-step-n">3</span>
+            <h3>Start shipping</h3>
+            <p class="wf-muted">Work arrives in weekly batches you can review and comment on.</p>
+          </li>
+        </ol>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'tabs' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Features</span>
+          <h2>One product, four ways to use it</h2>
+        </div>
+        <div class="wf-tabs">
+          <span class="wf-tab on">Planning</span>
+          <span class="wf-tab">Design</span>
+          <span class="wf-tab">Development</span>
+          <span class="wf-tab">Reporting</span>
+        </div>
+        <div class="wf-card wf-tabpanel">
+          <div class="wf-split">
+            <div class="wf-stack">
+              <h3>What the selected tab shows</h3>
+              <p class="wf-lead">Describe this use case in two sentences. Each tab swaps the copy and the image.</p>
+              <ul class="wf-checks">
+                <li>Supporting detail</li>
+                <li>Supporting detail</li>
+                <li>Supporting detail</li>
+              </ul>
+            </div>
+            <div class="wf-img" role="img" aria-label="Tab image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+</section>

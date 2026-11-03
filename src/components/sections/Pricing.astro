@@ -1,0 +1,276 @@
+---
+/**
+ * Pricing — 5 layouts.
+ *   tiers-3          3 tiers
+ *   toggle           3 tiers + billing toggle
+ *   tiers-2          2 tiers
+ *   single           Single plan
+ *   table            Comparison table
+ *
+ * Props: variant, tone ('base' | 'muted' | 'primary').
+ * Styles come from src/styles/wireframe.css and the tokens on the parent .wf element.
+ */
+export type PricingVariant = 'tiers-3' | 'toggle' | 'tiers-2' | 'single' | 'table';
+interface Props {
+  variant?: PricingVariant;
+  tone?: 'base' | 'muted' | 'primary';
+}
+const { variant = 'tiers-3', tone = 'base' } = Astro.props;
+---
+<section class:list={['wf-sec', tone !== 'base' && `tone-${tone}`]} data-type="pricing" data-variant={variant}>
+  {variant === 'tiers-3' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Pricing</span>
+          <h2>Plans that grow with you</h2>
+          <p class="wf-lead">Example prices. Say what’s billed monthly and what’s included.</p>
+        </div>
+        <div class="wf-grid c3">
+          <div class="wf-card wf-plan">
+            <h3>Starter</h3>
+            <p class="wf-muted">For one person getting started.</p>
+            <div class="wf-price">€29<small> / month</small>
+            </div>
+            <a class="wf-btn wf-btn-secondary" href="#">Start with Starter</a>
+            <ul class="wf-checks">
+              <li>Core features</li>
+              <li>1 project</li>
+              <li>Email support</li>
+            </ul>
+          </div>
+          <div class="wf-card wf-plan featured">
+            <span class="wf-badge">Popular</span>
+            <h3>Growth</h3>
+            <p class="wf-muted">For small teams shipping every week.</p>
+            <div class="wf-price">€79<small> / month</small>
+            </div>
+            <a class="wf-btn" href="#">Start with Growth</a>
+            <ul class="wf-checks">
+              <li>Everything in Starter</li>
+              <li>Unlimited projects</li>
+              <li>Priority support</li>
+              <li>Team roles</li>
+            </ul>
+          </div>
+          <div class="wf-card wf-plan">
+            <h3>Scale</h3>
+            <p class="wf-muted">For companies with procurement needs.</p>
+            <div class="wf-price">Custom</div>
+            <a class="wf-btn wf-btn-secondary" href="#">Talk to sales</a>
+            <ul class="wf-checks">
+              <li>Everything in Growth</li>
+              <li>SSO and audit log</li>
+              <li>Dedicated manager</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'toggle' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Pricing</span>
+          <h2>Plans that grow with you</h2>
+          <p class="wf-lead">Example prices. Yearly billing shown as a monthly equivalent.</p>
+        </div>
+        <div class="wf-toggle-row">
+          <div class="wf-seg">
+            <span class="on">Monthly</span>
+            <span>Yearly · save 20%</span>
+          </div>
+        </div>
+        <div class="wf-grid c3">
+          <div class="wf-card wf-plan">
+            <h3>Starter</h3>
+            <p class="wf-muted">For one person getting started.</p>
+            <div class="wf-price">€29<small> / month</small>
+            </div>
+            <a class="wf-btn wf-btn-secondary" href="#">Start with Starter</a>
+            <ul class="wf-checks">
+              <li>Core features</li>
+              <li>1 project</li>
+              <li>Email support</li>
+            </ul>
+          </div>
+          <div class="wf-card wf-plan featured">
+            <span class="wf-badge">Popular</span>
+            <h3>Growth</h3>
+            <p class="wf-muted">For small teams shipping every week.</p>
+            <div class="wf-price">€79<small> / month</small>
+            </div>
+            <a class="wf-btn" href="#">Start with Growth</a>
+            <ul class="wf-checks">
+              <li>Everything in Starter</li>
+              <li>Unlimited projects</li>
+              <li>Priority support</li>
+              <li>Team roles</li>
+            </ul>
+          </div>
+          <div class="wf-card wf-plan">
+            <h3>Scale</h3>
+            <p class="wf-muted">For companies with procurement needs.</p>
+            <div class="wf-price">Custom</div>
+            <a class="wf-btn wf-btn-secondary" href="#">Talk to sales</a>
+            <ul class="wf-checks">
+              <li>Everything in Growth</li>
+              <li>SSO and audit log</li>
+              <li>Dedicated manager</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'tiers-2' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Pricing</span>
+          <h2>Plans that grow with you</h2>
+          <p class="wf-lead">Example prices. Say what’s billed monthly and what’s included.</p>
+        </div>
+        <div class="wf-grid c2 wf-narrow">
+          <div class="wf-card wf-plan featured">
+            <span class="wf-badge">Popular</span>
+            <h3>Growth</h3>
+            <p class="wf-muted">For small teams shipping every week.</p>
+            <div class="wf-price">€79<small> / month</small>
+            </div>
+            <a class="wf-btn" href="#">Start with Growth</a>
+            <ul class="wf-checks">
+              <li>Everything in Starter</li>
+              <li>Unlimited projects</li>
+              <li>Priority support</li>
+              <li>Team roles</li>
+            </ul>
+          </div>
+          <div class="wf-card wf-plan">
+            <h3>Scale</h3>
+            <p class="wf-muted">For companies with procurement needs.</p>
+            <div class="wf-price">Custom</div>
+            <a class="wf-btn wf-btn-secondary" href="#">Talk to sales</a>
+            <ul class="wf-checks">
+              <li>Everything in Growth</li>
+              <li>SSO and audit log</li>
+              <li>Dedicated manager</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'single' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Pricing</span>
+          <h2>One plan, everything included</h2>
+        </div>
+        <div class="wf-card wf-single-plan">
+          <div class="wf-stack">
+            <h3>Subscription</h3>
+            <p class="wf-muted">One sentence on who this is for and how work is delivered.</p>
+            <div class="wf-price">€149<small> / month</small>
+            </div>
+            <a class="wf-btn" href="#">Start your subscription</a>
+            <p class="wf-small wf-muted">Pause or cancel anytime.</p>
+          </div>
+          <div class="wf-stack">
+            <p class="wf-small" style="font-weight:600">What’s included</p>
+            <ul class="wf-checks cols">
+              <li>Unlimited requests</li>
+              <li>One request at a time</li>
+              <li>Weekly delivery</li>
+              <li>Dedicated lead</li>
+              <li>Shared workspace</li>
+              <li>Source files</li>
+              <li>Pause anytime</li>
+              <li>Priority support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'table' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Pricing</span>
+          <h2>Compare plans side by side</h2>
+        </div>
+        <div class="wf-tablewrap">
+          <table class="wf-table">
+            <thead>
+              <tr>
+                <th>Features</th>
+                <th>
+                  <div class="wf-th">
+                    <b>Starter</b>
+                    <span class="wf-price-s">€29</span>
+                    <a class="wf-btn wf-btn-secondary" href="#">Choose</a>
+                  </div>
+                </th>
+                <th>
+                  <div class="wf-th">
+                    <b>Growth</b>
+                    <span class="wf-price-s">€79</span>
+                    <a class="wf-btn" href="#">Choose</a>
+                  </div>
+                </th>
+                <th>
+                  <div class="wf-th">
+                    <b>Scale</b>
+                    <span class="wf-price-s">Custom</span>
+                    <a class="wf-btn wf-btn-secondary" href="#">Choose</a>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Projects</td>
+                <td class="c">1</td>
+                <td class="c">Unlimited</td>
+                <td class="c">Unlimited</td>
+              </tr>
+              <tr>
+                <td>Team members</td>
+                <td class="c">1</td>
+                <td class="c">5</td>
+                <td class="c">Unlimited</td>
+              </tr>
+              <tr>
+                <td>Priority support</td>
+                <td class="c no">—</td>
+                <td class="c">✓</td>
+                <td class="c">✓</td>
+              </tr>
+              <tr>
+                <td>Team roles</td>
+                <td class="c no">—</td>
+                <td class="c">✓</td>
+                <td class="c">✓</td>
+              </tr>
+              <tr>
+                <td>SSO and audit log</td>
+                <td class="c no">—</td>
+                <td class="c no">—</td>
+                <td class="c">✓</td>
+              </tr>
+              <tr>
+                <td>Dedicated manager</td>
+                <td class="c no">—</td>
+                <td class="c no">—</td>
+                <td class="c">✓</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </Fragment>
+  )}
+</section>

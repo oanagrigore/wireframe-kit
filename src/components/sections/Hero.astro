@@ -1,0 +1,166 @@
+---
+/**
+ * Hero — 8 layouts.
+ *   split            Split
+ *   split-reverse    Split, image left
+ *   centered         Centered
+ *   image-below      Image below
+ *   video            Video
+ *   cover            Cover image
+ *   statement        Statement
+ *   form             Email capture
+ *
+ * Props: variant, tone ('base' | 'muted' | 'primary').
+ * Styles come from src/styles/wireframe.css and the tokens on the parent .wf element.
+ */
+export type HeroVariant = 'split' | 'split-reverse' | 'centered' | 'image-below' | 'video' | 'cover' | 'statement' | 'form';
+interface Props {
+  variant?: HeroVariant;
+  tone?: 'base' | 'muted' | 'primary';
+}
+const { variant = 'split', tone = 'base' } = Astro.props;
+---
+<section class:list={['wf-sec', tone !== 'base' && `tone-${tone}`]} data-type="hero" data-variant={variant}>
+  {variant === 'split' && (
+    <Fragment>
+      <div class="wf-in wf-split">
+        <div class="wf-stack">
+          <span class="wf-eyebrow">New · Short announcement →</span>
+          <h1>Headline that names the outcome your customer wants</h1>
+          <p class="wf-lead">One or two sentences on who this is for and what changes for them after they sign up.</p>
+          <div class="wf-btns">
+            <a class="wf-btn" href="#">Get started</a>
+            <a class="wf-btn wf-btn-secondary" href="#">Book a demo</a>
+          </div>
+          <p class="wf-small wf-muted">Supporting line: trial length, setup time or a proof point.</p>
+        </div>
+        <div class="wf-img" role="img" aria-label="Hero image">
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'split-reverse' && (
+    <Fragment>
+      <div class="wf-in wf-split rev">
+        <div class="wf-stack">
+          <span class="wf-eyebrow">New · Short announcement →</span>
+          <h1>Headline that names the outcome your customer wants</h1>
+          <p class="wf-lead">One or two sentences on who this is for and what changes for them after they sign up.</p>
+          <div class="wf-btns">
+            <a class="wf-btn" href="#">Get started</a>
+            <a class="wf-btn wf-btn-secondary" href="#">Book a demo</a>
+          </div>
+        </div>
+        <div class="wf-img" role="img" aria-label="Hero image">
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'centered' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-stack" style="align-items:center;text-align:center;max-width:820px;margin-inline:auto">
+          <span class="wf-eyebrow" style="align-self:center">New · Short announcement →</span>
+          <h1>Headline that names the outcome your customer wants</h1>
+          <p class="wf-lead">One or two sentences on who this is for and what changes for them after they sign up.</p>
+          <div class="wf-btns" style="justify-content:center">
+            <a class="wf-btn" href="#">Get started</a>
+            <a class="wf-btn wf-btn-secondary" href="#">Book a demo</a>
+          </div>
+          <p class="wf-small wf-muted">Supporting line: trial length, setup time or a proof point.</p>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'image-below' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-stack" style="align-items:center;text-align:center;max-width:820px;margin-inline:auto">
+          <span class="wf-eyebrow" style="align-self:center">New · Short announcement →</span>
+          <h1>Headline that names the outcome your customer wants</h1>
+          <p class="wf-lead">One or two sentences on who this is for and what changes for them after they sign up.</p>
+          <div class="wf-btns" style="justify-content:center">
+            <a class="wf-btn" href="#">Get started</a>
+            <a class="wf-btn wf-btn-secondary" href="#">Book a demo</a>
+          </div>
+          <p class="wf-small wf-muted">Supporting line: trial length, setup time or a proof point.</p>
+        </div>
+        <div class="wf-img" style="margin-top:calc(var(--gap) * 2.5)" role="img" aria-label="Product screenshot">
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'video' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-stack" style="align-items:center;text-align:center;max-width:820px;margin-inline:auto">
+          <span class="wf-eyebrow" style="align-self:center">New · Short announcement →</span>
+          <h1>Headline that names the outcome your customer wants</h1>
+          <p class="wf-lead">One or two sentences on who this is for and what changes for them after they sign up.</p>
+          <div class="wf-btns" style="justify-content:center">
+            <a class="wf-btn" href="#">Get started</a>
+            <a class="wf-btn wf-btn-secondary" href="#">Watch the tour</a>
+          </div>
+        </div>
+        <div class="wf-media" style="margin-top:calc(var(--gap) * 2.5)">
+          <div class="wf-img" role="img" aria-label="Video poster">
+          </div>
+          <span class="wf-play" aria-hidden="true">
+          </span>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'cover' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-cover">
+          <div class="wf-img" role="img" aria-label="Background image">
+          </div>
+          <div class="wf-card">
+            <span class="wf-eyebrow">New · Short announcement →</span>
+            <h1>Headline that names the outcome your customer wants</h1>
+            <p class="wf-lead">One or two sentences on who this is for and what changes for them after they sign up.</p>
+            <div class="wf-btns">
+              <a class="wf-btn" href="#">Get started</a>
+              <a class="wf-btn wf-btn-secondary" href="#">Book a demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'statement' && (
+    <Fragment>
+      <div class="wf-in wf-statement">
+        <span class="wf-eyebrow">Studio · Est. 2026</span>
+        <h1>A bold statement headline that sets the tone for everything below</h1>
+        <div class="wf-statement-foot">
+          <p class="wf-lead">Supporting paragraph with the who and the what, kept short.</p>
+          <div class="wf-btns">
+            <a class="wf-btn" href="#">Start a project</a>
+            <a class="wf-btn wf-btn-secondary" href="#">See our work</a>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'form' && (
+    <Fragment>
+      <div class="wf-in wf-split">
+        <div class="wf-stack">
+          <span class="wf-eyebrow">New · Short announcement →</span>
+          <h1>Headline that names the outcome your customer wants</h1>
+          <p class="wf-lead">One or two sentences on who this is for and what changes for them after they sign up.</p>
+          <div class="wf-form">
+            <div class="wf-input">Work email</div>
+            <a class="wf-btn" href="#">Get started</a>
+          </div>
+          <p class="wf-small wf-muted">Free for 14 days. No card needed.</p>
+        </div>
+        <div class="wf-img" role="img" aria-label="Hero image">
+        </div>
+      </div>
+    </Fragment>
+  )}
+</section>

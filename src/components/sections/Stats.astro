@@ -1,0 +1,156 @@
+---
+/**
+ * Stats — 5 layouts.
+ *   header           Header + stats
+ *   row              Stats only
+ *   split            Header left
+ *   cards            Cards
+ *   big              Big numbers
+ *
+ * Props: variant, tone ('base' | 'muted' | 'primary').
+ * Styles come from src/styles/wireframe.css and the tokens on the parent .wf element.
+ */
+export type StatsVariant = 'header' | 'row' | 'split' | 'cards' | 'big';
+interface Props {
+  variant?: StatsVariant;
+  tone?: 'base' | 'muted' | 'primary';
+}
+const { variant = 'header', tone = 'base' } = Astro.props;
+---
+<section class:list={['wf-sec', tone !== 'base' && `tone-${tone}`]} data-type="stats" data-variant={variant}>
+  {variant === 'header' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head">
+          <span class="wf-eyebrow">Results</span>
+          <h2>Numbers that back up the promise</h2>
+          <p class="wf-lead">Example figures. Swap in results you can source.</p>
+        </div>
+        <div class="wf-stats">
+          <div class="wf-stat">
+            <span class="wf-num">48%</span>
+            <span class="wf-muted">Shorter time to launch</span>
+          </div>
+          <div class="wf-stat">
+            <span class="wf-num">3.2×</span>
+            <span class="wf-muted">More qualified leads</span>
+          </div>
+          <div class="wf-stat">
+            <span class="wf-num">120+</span>
+            <span class="wf-muted">Teams onboarded</span>
+          </div>
+          <div class="wf-stat">
+            <span class="wf-num">4.9/5</span>
+            <span class="wf-muted">Average client rating</span>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'row' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-stats">
+          <div class="wf-stat">
+            <span class="wf-num">48%</span>
+            <span class="wf-muted">Shorter time to launch</span>
+          </div>
+          <div class="wf-stat">
+            <span class="wf-num">3.2×</span>
+            <span class="wf-muted">More qualified leads</span>
+          </div>
+          <div class="wf-stat">
+            <span class="wf-num">120+</span>
+            <span class="wf-muted">Teams onboarded</span>
+          </div>
+          <div class="wf-stat">
+            <span class="wf-num">4.9/5</span>
+            <span class="wf-muted">Average client rating</span>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'split' && (
+    <Fragment>
+      <div class="wf-in wf-split top">
+        <div class="wf-stack">
+          <span class="wf-eyebrow">Results</span>
+          <h2>Numbers that back up the promise</h2>
+          <p class="wf-lead">Example figures. Swap in results you can source.</p>
+        </div>
+        <div class="wf-stats two">
+          <div class="wf-stat">
+            <span class="wf-num">48%</span>
+            <span class="wf-muted">Shorter time to launch</span>
+          </div>
+          <div class="wf-stat">
+            <span class="wf-num">3.2×</span>
+            <span class="wf-muted">More qualified leads</span>
+          </div>
+          <div class="wf-stat">
+            <span class="wf-num">120+</span>
+            <span class="wf-muted">Teams onboarded</span>
+          </div>
+          <div class="wf-stat">
+            <span class="wf-num">4.9/5</span>
+            <span class="wf-muted">Average client rating</span>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'cards' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Results</span>
+          <h2>Numbers that back up the promise</h2>
+          <p class="wf-lead">Example figures. Swap in results you can source.</p>
+        </div>
+        <div class="wf-grid c4">
+          <div class="wf-card">
+            <span class="wf-num">48%</span>
+            <span class="wf-muted">Shorter time to launch</span>
+          </div>
+          <div class="wf-card">
+            <span class="wf-num">3.2×</span>
+            <span class="wf-muted">More qualified leads</span>
+          </div>
+          <div class="wf-card">
+            <span class="wf-num">120+</span>
+            <span class="wf-muted">Teams onboarded</span>
+          </div>
+          <div class="wf-card">
+            <span class="wf-num">4.9/5</span>
+            <span class="wf-muted">Average client rating</span>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'big' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Results</span>
+          <h2>Numbers that back up the promise</h2>
+        </div>
+        <div class="wf-stats big">
+          <div class="wf-stat">
+            <span class="wf-num">48%</span>
+            <span class="wf-muted">Shorter time to launch</span>
+          </div>
+          <div class="wf-stat">
+            <span class="wf-num">3.2×</span>
+            <span class="wf-muted">More qualified leads</span>
+          </div>
+          <div class="wf-stat">
+            <span class="wf-num">120+</span>
+            <span class="wf-muted">Teams onboarded</span>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+</section>

@@ -1,0 +1,233 @@
+---
+/**
+ * Testimonials — 5 layouts.
+ *   grid             Grid
+ *   single           Single quote
+ *   split            Quote + image
+ *   wall             Wall
+ *   logos            With logos
+ *
+ * Props: variant, tone ('base' | 'muted' | 'primary').
+ * Styles come from src/styles/wireframe.css and the tokens on the parent .wf element.
+ */
+export type TestimonialsVariant = 'grid' | 'single' | 'split' | 'wall' | 'logos';
+interface Props {
+  variant?: TestimonialsVariant;
+  tone?: 'base' | 'muted' | 'primary';
+}
+const { variant = 'grid', tone = 'base' } = Astro.props;
+---
+<section class:list={['wf-sec', tone !== 'base' && `tone-${tone}`]} data-type="testimonials" data-variant={variant}>
+  {variant === 'grid' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Testimonials</span>
+          <h2>What clients say after the first month</h2>
+        </div>
+        <div class="wf-grid c3">
+          <figure class="wf-card" style="margin:0">
+            <p class="wf-quote">“A specific quote about a measurable result reads better than general praise.”</p>
+            <figcaption class="wf-person">
+              <span class="wf-avatar">
+              </span>
+              <div>
+                <b>Customer name</b>
+                <span class="wf-small wf-muted">Role, Company</span>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="wf-card" style="margin:0">
+            <p class="wf-quote">“Quote that answers the objection most buyers raise before they sign up.”</p>
+            <figcaption class="wf-person">
+              <span class="wf-avatar">
+              </span>
+              <div>
+                <b>Customer name</b>
+                <span class="wf-small wf-muted">Role, Company</span>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="wf-card" style="margin:0">
+            <p class="wf-quote">“Short quote on what it was like to work with the team, in their own words.”</p>
+            <figcaption class="wf-person">
+              <span class="wf-avatar">
+              </span>
+              <div>
+                <b>Customer name</b>
+                <span class="wf-small wf-muted">Role, Company</span>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'single' && (
+    <Fragment>
+      <div class="wf-in wf-single">
+        <p class="wf-big-quote">“A specific quote about a measurable result reads better than general praise.”</p>
+        <div class="wf-person" style="padding-top:0">
+          <span class="wf-avatar">
+          </span>
+          <div>
+            <b>Customer name</b>
+            <span class="wf-small wf-muted">Role, Company</span>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'split' && (
+    <Fragment>
+      <div class="wf-in wf-split">
+        <div class="wf-stack" style="gap:28px">
+          <span class="wf-eyebrow">Client story</span>
+          <p class="wf-big-quote left">“A specific quote about a measurable result reads better than general praise.”</p>
+          <div class="wf-person">
+            <span class="wf-avatar">
+            </span>
+            <div>
+              <b>Customer name</b>
+              <span class="wf-small wf-muted">Role, Company</span>
+            </div>
+          </div>
+        </div>
+        <div class="wf-img" role="img" aria-label="Client photo">
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'wall' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Testimonials</span>
+          <h2>What clients say after the first month</h2>
+        </div>
+        <div class="wf-wall">
+          <figure class="wf-card" style="margin:0">
+            <p class="wf-quote">“A specific quote about a measurable result reads better than general praise.”</p>
+            <figcaption>
+              <div class="wf-person">
+                <span class="wf-avatar">
+                </span>
+                <div>
+                  <b>Customer name</b>
+                  <span class="wf-small wf-muted">Role, Company</span>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="wf-card" style="margin:0">
+            <p class="wf-quote">“Quote that answers the objection most buyers raise before they sign up.”</p>
+            <figcaption>
+              <div class="wf-person">
+                <span class="wf-avatar">
+                </span>
+                <div>
+                  <b>Customer name</b>
+                  <span class="wf-small wf-muted">Role, Company</span>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="wf-card" style="margin:0">
+            <p class="wf-quote">“Short quote on what it was like to work with the team, in their own words.”</p>
+            <figcaption>
+              <div class="wf-person">
+                <span class="wf-avatar">
+                </span>
+                <div>
+                  <b>Customer name</b>
+                  <span class="wf-small wf-muted">Role, Company</span>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="wf-card" style="margin:0">
+            <p class="wf-quote">“Two lines is plenty. Name the problem they had and what it looks like now.”</p>
+            <figcaption>
+              <div class="wf-person">
+                <span class="wf-avatar">
+                </span>
+                <div>
+                  <b>Customer name</b>
+                  <span class="wf-small wf-muted">Role, Company</span>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="wf-card" style="margin:0">
+            <p class="wf-quote">“A longer quote can work in a wall layout, as long as the first sentence carries the point on its own. Readers scan the openings and only some finish.”</p>
+            <figcaption>
+              <div class="wf-person">
+                <span class="wf-avatar">
+                </span>
+                <div>
+                  <b>Customer name</b>
+                  <span class="wf-small wf-muted">Role, Company</span>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="wf-card" style="margin:0">
+            <p class="wf-quote">“Short and specific.”</p>
+            <figcaption>
+              <div class="wf-person">
+                <span class="wf-avatar">
+                </span>
+                <div>
+                  <b>Customer name</b>
+                  <span class="wf-small wf-muted">Role, Company</span>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'logos' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">Testimonials</span>
+          <h2>Teams that switched, in their words</h2>
+        </div>
+        <div class="wf-grid c2">
+          <figure class="wf-card" style="margin:0;gap:20px">
+            <span class="wf-logo-ph">
+            </span>
+            <p class="wf-quote" style="font-size:1.1875em">“A specific quote about a measurable result reads better than general praise.”</p>
+            <figcaption>
+              <div class="wf-person">
+                <span class="wf-avatar">
+                </span>
+                <div>
+                  <b>Customer name</b>
+                  <span class="wf-small wf-muted">Role, Company</span>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+          <figure class="wf-card" style="margin:0;gap:20px">
+            <span class="wf-logo-ph">
+            </span>
+            <p class="wf-quote" style="font-size:1.1875em">“Quote that answers the objection most buyers raise before they sign up.”</p>
+            <figcaption>
+              <div class="wf-person">
+                <span class="wf-avatar">
+                </span>
+                <div>
+                  <b>Customer name</b>
+                  <span class="wf-small wf-muted">Role, Company</span>
+                </div>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </Fragment>
+  )}
+</section>

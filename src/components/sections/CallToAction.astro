@@ -1,0 +1,116 @@
+---
+/**
+ * Call to action — 6 layouts.
+ *   band             Band
+ *   centered         Centered
+ *   split            Split with image
+ *   newsletter       Newsletter
+ *   cover            Cover image
+ *   inline           Inline bar
+ *
+ * Props: variant, tone ('base' | 'muted' | 'primary').
+ * Styles come from src/styles/wireframe.css and the tokens on the parent .wf element.
+ */
+export type CallToActionVariant = 'band' | 'centered' | 'split' | 'newsletter' | 'cover' | 'inline';
+interface Props {
+  variant?: CallToActionVariant;
+  tone?: 'base' | 'muted' | 'primary';
+}
+const { variant = 'band', tone = 'base' } = Astro.props;
+---
+<section class:list={['wf-sec', tone !== 'base' && `tone-${tone}`]} data-type="cta" data-variant={variant}>
+  {variant === 'band' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-band">
+          <div class="wf-stack" style="gap:12px">
+            <h2>Closing headline that repeats the main promise</h2>
+            <p class="wf-lead">Remove the last doubt: setup time, trial, or who they’ll talk to.</p>
+          </div>
+          <div class="wf-btns">
+            <a class="wf-btn" href="#">Get started</a>
+            <a class="wf-btn wf-btn-secondary" href="#">Book a demo</a>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'centered' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center" style="margin-bottom:0">
+          <h2>Closing headline that repeats the main promise</h2>
+          <p class="wf-lead">Remove the last doubt: setup time, trial, or who they’ll talk to.</p>
+          <div class="wf-btns" style="justify-content:center;margin-top:8px">
+            <a class="wf-btn" href="#">Get started</a>
+            <a class="wf-btn wf-btn-secondary" href="#">Book a demo</a>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'split' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-ctasplit">
+          <div class="wf-stack">
+            <h2>Closing headline that repeats the main promise</h2>
+            <p class="wf-lead">Remove the last doubt: setup time, trial, or who they’ll talk to.</p>
+            <div class="wf-btns">
+              <a class="wf-btn" href="#">Get started</a>
+              <a class="wf-btn wf-btn-secondary" href="#">Book a demo</a>
+            </div>
+          </div>
+          <div class="wf-img" role="img" aria-label="CTA image">
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'newsletter' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center" style="margin-bottom:0">
+          <h2>Get one useful idea in your inbox every week</h2>
+          <p class="wf-lead">Say how often you send and what’s in it.</p>
+          <div class="wf-form">
+            <div class="wf-input">Work email</div>
+            <a class="wf-btn" href="#">Subscribe</a>
+          </div>
+          <p class="wf-small wf-muted">Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'cover' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-cover center">
+          <div class="wf-img" role="img" aria-label="Background image">
+          </div>
+          <div class="wf-card" style="align-items:center;text-align:center">
+            <h2>Closing headline that repeats the main promise</h2>
+            <p class="wf-lead">Remove the last doubt: setup time, trial, or who they’ll talk to.</p>
+            <div class="wf-btns" style="justify-content:center">
+              <a class="wf-btn" href="#">Get started</a>
+              <a class="wf-btn wf-btn-secondary" href="#">Book a demo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'inline' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-inline-cta">
+          <div class="wf-stack" style="gap:4px">
+            <h3>Ready when you are</h3>
+            <p class="wf-muted">One line that lowers the bar to start.</p>
+          </div>
+          <a class="wf-btn" href="#">Get started</a>
+        </div>
+      </div>
+    </Fragment>
+  )}
+</section>

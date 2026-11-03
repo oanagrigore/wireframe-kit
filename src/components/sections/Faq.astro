@@ -1,0 +1,161 @@
+---
+/**
+ * FAQ — 4 layouts.
+ *   two-col          Two column
+ *   accordion        Accordion
+ *   accordion-split  Accordion + contact
+ *   grid             Grid
+ *
+ * Props: variant, tone ('base' | 'muted' | 'primary').
+ * Styles come from src/styles/wireframe.css and the tokens on the parent .wf element.
+ */
+export type FaqVariant = 'two-col' | 'accordion' | 'accordion-split' | 'grid';
+interface Props {
+  variant?: FaqVariant;
+  tone?: 'base' | 'muted' | 'primary';
+}
+const { variant = 'two-col', tone = 'base' } = Astro.props;
+---
+<section class:list={['wf-sec', tone !== 'base' && `tone-${tone}`]} data-type="faq" data-variant={variant}>
+  {variant === 'two-col' && (
+    <Fragment>
+      <div class="wf-in wf-split top">
+        <div class="wf-stack">
+          <span class="wf-eyebrow">FAQ</span>
+          <h2>Questions buyers ask before they sign up</h2>
+          <p class="wf-lead">Can’t find an answer? Point to a contact route here.</p>
+        </div>
+        <ul class="wf-faq">
+          <li>
+            <h4>How does billing work?</h4>
+            <p class="wf-muted">Short, direct answer in two sentences. Link to a help article if it needs more.</p>
+          </li>
+          <li>
+            <h4>Can I cancel anytime?</h4>
+            <p class="wf-muted">Say yes or no first, then the condition. Buyers scan for the first word.</p>
+          </li>
+          <li>
+            <h4>What’s included in onboarding?</h4>
+            <p class="wf-muted">List what happens in the first week and who they’ll talk to.</p>
+          </li>
+          <li>
+            <h4>Do you offer a trial?</h4>
+            <p class="wf-muted">State the length and what’s unlocked. Mention if a card is needed.</p>
+          </li>
+          <li>
+            <h4>Where is my data stored?</h4>
+            <p class="wf-muted">Region, provider and the standard you follow, in one line.</p>
+          </li>
+        </ul>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'accordion' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">FAQ</span>
+          <h2>Questions buyers ask before they sign up</h2>
+        </div>
+        <div class="wf-acc">
+          <details open>
+            <summary>How does billing work?</summary>
+            <p>Short, direct answer in two sentences. Link to a help article if it needs more.</p>
+          </details>
+          <details>
+            <summary>Can I cancel anytime?</summary>
+            <p>Say yes or no first, then the condition. Buyers scan for the first word.</p>
+          </details>
+          <details>
+            <summary>What’s included in onboarding?</summary>
+            <p>List what happens in the first week and who they’ll talk to.</p>
+          </details>
+          <details>
+            <summary>Do you offer a trial?</summary>
+            <p>State the length and what’s unlocked. Mention if a card is needed.</p>
+          </details>
+          <details>
+            <summary>Where is my data stored?</summary>
+            <p>Region, provider and the standard you follow, in one line.</p>
+          </details>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'accordion-split' && (
+    <Fragment>
+      <div class="wf-in wf-split top">
+        <div class="wf-stack">
+          <span class="wf-eyebrow">FAQ</span>
+          <h2>Questions buyers ask before they sign up</h2>
+          <p class="wf-lead">Answer the top five. Link the rest to a help center.</p>
+          <div class="wf-card" style="margin-top:8px">
+            <h3>Still have questions?</h3>
+            <p class="wf-muted">Say who answers and how fast.</p>
+            <div class="wf-btns">
+              <a class="wf-btn wf-btn-secondary" href="#">Contact us</a>
+            </div>
+          </div>
+        </div>
+        <div class="wf-acc" style="max-width:none;margin:0">
+          <details open>
+            <summary>How does billing work?</summary>
+            <p>Short, direct answer in two sentences. Link to a help article if it needs more.</p>
+          </details>
+          <details>
+            <summary>Can I cancel anytime?</summary>
+            <p>Say yes or no first, then the condition. Buyers scan for the first word.</p>
+          </details>
+          <details>
+            <summary>What’s included in onboarding?</summary>
+            <p>List what happens in the first week and who they’ll talk to.</p>
+          </details>
+          <details>
+            <summary>Do you offer a trial?</summary>
+            <p>State the length and what’s unlocked. Mention if a card is needed.</p>
+          </details>
+          <details>
+            <summary>Where is my data stored?</summary>
+            <p>Region, provider and the standard you follow, in one line.</p>
+          </details>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'grid' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">FAQ</span>
+          <h2>Questions buyers ask before they sign up</h2>
+        </div>
+        <div class="wf-grid c2 wf-faqgrid">
+          <div class="wf-stack" style="gap:8px">
+            <h4>How does billing work?</h4>
+            <p class="wf-muted">Short, direct answer in two sentences. Link to a help article if it needs more.</p>
+          </div>
+          <div class="wf-stack" style="gap:8px">
+            <h4>Can I cancel anytime?</h4>
+            <p class="wf-muted">Say yes or no first, then the condition. Buyers scan for the first word.</p>
+          </div>
+          <div class="wf-stack" style="gap:8px">
+            <h4>What’s included in onboarding?</h4>
+            <p class="wf-muted">List what happens in the first week and who they’ll talk to.</p>
+          </div>
+          <div class="wf-stack" style="gap:8px">
+            <h4>Do you offer a trial?</h4>
+            <p class="wf-muted">State the length and what’s unlocked. Mention if a card is needed.</p>
+          </div>
+          <div class="wf-stack" style="gap:8px">
+            <h4>Where is my data stored?</h4>
+            <p class="wf-muted">Region, provider and the standard you follow, in one line.</p>
+          </div>
+          <div class="wf-stack" style="gap:8px">
+            <h4>Who will I work with?</h4>
+            <p class="wf-muted">Name the roles, and whether it’s the same people every time.</p>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+</section>

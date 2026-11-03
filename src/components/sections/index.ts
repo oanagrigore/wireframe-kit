@@ -1,0 +1,12 @@
+export { default as Navbar } from './Navbar.astro';
+export { default as Hero } from './Hero.astro';
+export { default as LogoCloud } from './LogoCloud.astro';
+export { default as Features } from './Features.astro';
+export { default as FeatureSplit } from './FeatureSplit.astro';
+export { default as Stats } from './Stats.astro';
+export { default as CaseStudies } from './CaseStudies.astro';
+export { default as Testimonials } from './Testimonials.astro';
+export { default as Pricing } from './Pricing.astro';
+export { default as Faq } from './Faq.astro';
+export { default as CallToAction } from './CallToAction.astro';
+export { default as Footer } from './Footer.astro';

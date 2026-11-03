@@ -1,0 +1,152 @@
+---
+/**
+ * Navbar — 6 layouts.
+ *   simple           Simple
+ *   split            Links left
+ *   centered         Centered logo
+ *   stacked          Stacked
+ *   floating         Floating bar
+ *   minimal          Minimal menu
+ *
+ * Props: variant, tone ('base' | 'muted' | 'primary').
+ * Styles come from src/styles/wireframe.css and the tokens on the parent .wf element.
+ */
+export type NavbarVariant = 'simple' | 'split' | 'centered' | 'stacked' | 'floating' | 'minimal';
+interface Props {
+  variant?: NavbarVariant;
+  tone?: 'base' | 'muted' | 'primary';
+}
+const { variant = 'simple', tone = 'base' } = Astro.props;
+---
+<header class:list={['wf-sec', 'wf-nav', variant, tone !== 'base' && `tone-${tone}`]} data-type="nav" data-variant={variant}>
+  {variant === 'simple' && (
+    <Fragment>
+      <div class="wf-in">
+        <a class="wf-logo" href="#">
+          <span class="wf-mark">
+          </span>Brand</a>
+          <nav class="wf-links">
+            <a href="#">Product</a>
+            <a href="#">Pricing</a>
+            <a href="#">Work</a>
+            <a href="#">About</a>
+          </nav>
+          <div class="wf-actions">
+            <a class="wf-btn wf-btn-ghost" href="#">Log in</a>
+            <a class="wf-btn" href="#">Get started</a>
+          </div>
+          <button class="wf-burger" aria-label="Menu">
+            <i>
+            </i>
+          </button>
+        </div>
+    </Fragment>
+  )}
+  {variant === 'split' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-nav-left">
+          <a class="wf-logo" href="#">
+            <span class="wf-mark">
+            </span>Brand</a>
+            <nav class="wf-links">
+              <a href="#">Product</a>
+              <a href="#">Solutions</a>
+              <a href="#">Pricing</a>
+              <a href="#">Resources</a>
+            </nav>
+          </div>
+          <div class="wf-actions">
+            <a class="wf-btn wf-btn-ghost" href="#">Log in</a>
+            <a class="wf-btn" href="#">Get started</a>
+          </div>
+          <button class="wf-burger" aria-label="Menu">
+            <i>
+            </i>
+          </button>
+        </div>
+    </Fragment>
+  )}
+  {variant === 'centered' && (
+    <Fragment>
+      <div class="wf-in">
+        <nav class="wf-links">
+          <a href="#">Product</a>
+          <a href="#">Pricing</a>
+          <a href="#">Work</a>
+        </nav>
+        <a class="wf-logo" href="#">
+          <span class="wf-mark">
+          </span>Brand</a>
+          <div class="wf-actions">
+            <a class="wf-btn wf-btn-ghost" href="#">Log in</a>
+            <a class="wf-btn" href="#">Get started</a>
+          </div>
+          <button class="wf-burger" aria-label="Menu">
+            <i>
+            </i>
+          </button>
+        </div>
+    </Fragment>
+  )}
+  {variant === 'stacked' && (
+    <Fragment>
+      <div class="wf-in">
+        <a class="wf-logo" href="#">
+          <span class="wf-mark">
+          </span>Brand</a>
+          <nav class="wf-links">
+            <a href="#">Work</a>
+            <a href="#">Services</a>
+            <a href="#">Pricing</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+          </nav>
+          <button class="wf-burger" aria-label="Menu">
+            <i>
+            </i>
+          </button>
+        </div>
+    </Fragment>
+  )}
+  {variant === 'floating' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-bar">
+          <a class="wf-logo" href="#">
+            <span class="wf-mark">
+            </span>Brand</a>
+            <nav class="wf-links">
+              <a href="#">Product</a>
+              <a href="#">Pricing</a>
+              <a href="#">Work</a>
+              <a href="#">About</a>
+            </nav>
+            <div class="wf-actions">
+              <a class="wf-btn" href="#">Get started</a>
+            </div>
+            <button class="wf-burger" aria-label="Menu">
+              <i>
+              </i>
+            </button>
+          </div>
+        </div>
+    </Fragment>
+  )}
+  {variant === 'minimal' && (
+    <Fragment>
+      <div class="wf-in">
+        <a class="wf-logo" href="#">
+          <span class="wf-mark">
+          </span>Brand</a>
+          <div class="wf-nav-min">
+            <a class="wf-btn wf-btn-secondary wf-hide-m" href="#">Get started</a>
+            <button class="wf-burger always" aria-label="Menu">
+              <i>
+              </i>
+            </button>
+          </div>
+        </div>
+    </Fragment>
+  )}
+</header>

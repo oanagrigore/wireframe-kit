@@ -1,0 +1,245 @@
+---
+/**
+ * Case studies — 5 layouts.
+ *   grid-3           3 cards
+ *   grid-2           2 cards
+ *   featured         Featured + list
+ *   list             Rows
+ *   carousel         Carousel
+ *
+ * Props: variant, tone ('base' | 'muted' | 'primary').
+ * Styles come from src/styles/wireframe.css and the tokens on the parent .wf element.
+ */
+export type CaseStudiesVariant = 'grid-3' | 'grid-2' | 'featured' | 'list' | 'carousel';
+interface Props {
+  variant?: CaseStudiesVariant;
+  tone?: 'base' | 'muted' | 'primary';
+}
+const { variant = 'grid-3', tone = 'base' } = Astro.props;
+---
+<section class:list={['wf-sec', tone !== 'base' && `tone-${tone}`]} data-type="cards" data-variant={variant}>
+  {variant === 'grid-3' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head">
+          <span class="wf-eyebrow">Case studies</span>
+          <h2>Work that shows the outcome</h2>
+          <p class="wf-lead">One line on what kind of clients and problems these cover.</p>
+        </div>
+        <div class="wf-grid c3">
+          <a class="wf-card media" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="body">
+              <span class="wf-tag">SaaS · Web design</span>
+              <h3>Client name: how they cut onboarding time in half</h3>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+          <a class="wf-card media" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="body">
+              <span class="wf-tag">E-commerce · Copy & design</span>
+              <h3>Client name: a new product page that lifted conversion</h3>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+          <a class="wf-card media" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="body">
+              <span class="wf-tag">Health · Development</span>
+              <h3>Client name: a booking flow patients finish on mobile</h3>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'grid-2' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head">
+          <span class="wf-eyebrow">Case studies</span>
+          <h2>Work that shows the outcome</h2>
+          <p class="wf-lead">One line on what kind of clients and problems these cover.</p>
+        </div>
+        <div class="wf-grid c2">
+          <a class="wf-card media" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="body">
+              <span class="wf-tag">SaaS · Web design</span>
+              <h3>Client name: how they cut onboarding time in half</h3>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+          <a class="wf-card media" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="body">
+              <span class="wf-tag">E-commerce · Copy & design</span>
+              <h3>Client name: a new product page that lifted conversion</h3>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'featured' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head">
+          <span class="wf-eyebrow">Case studies</span>
+          <h2>Work that shows the outcome</h2>
+          <p class="wf-lead">One line on what kind of clients and problems these cover.</p>
+        </div>
+        <div class="wf-featured">
+          <a class="wf-card media" href="#">
+            <div class="wf-img" role="img" aria-label="Featured case study">
+            </div>
+            <div class="body">
+              <span class="wf-tag">SaaS · Web design</span>
+              <h3>Client name: how they cut onboarding time in half</h3>
+              <p class="wf-muted">One-line summary of the brief and the result.</p>
+            </div>
+          </a>
+          <ul class="wf-clist">
+            <li>
+              <a href="#">
+                <span class="wf-tag">E-commerce · Copy & design</span>
+                <h3>Client name: a new product page that lifted conversion</h3>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="wf-tag">Health · Development</span>
+                <h3>Client name: a booking flow patients finish on mobile</h3>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="wf-tag">Transportation · Brand</span>
+                <h3>Client name: one brand across 14 regional sites</h3>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="wf-tag">Tech · Copy</span>
+                <h3>Client name: a pricing page sales teams actually use</h3>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'list' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head">
+          <span class="wf-eyebrow">Case studies</span>
+          <h2>Work that shows the outcome</h2>
+        </div>
+        <div class="wf-rows">
+          <a class="wf-rowcard" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="wf-stack" style="gap:10px">
+              <span class="wf-tag">SaaS · Web design</span>
+              <h3>Client name: how they cut onboarding time in half</h3>
+              <p class="wf-muted">One-line summary of the brief and the result.</p>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+          <a class="wf-rowcard" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="wf-stack" style="gap:10px">
+              <span class="wf-tag">E-commerce · Copy & design</span>
+              <h3>Client name: a new product page that lifted conversion</h3>
+              <p class="wf-muted">One-line summary of the brief and the result.</p>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+          <a class="wf-rowcard" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="wf-stack" style="gap:10px">
+              <span class="wf-tag">Health · Development</span>
+              <h3>Client name: a booking flow patients finish on mobile</h3>
+              <p class="wf-muted">One-line summary of the brief and the result.</p>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'carousel' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-headrow">
+          <div class="wf-head">
+            <span class="wf-eyebrow">Case studies</span>
+            <h2>Work that shows the outcome</h2>
+          </div>
+          <div class="wf-arrows">
+            <button class="wf-arrow" aria-label="Previous">←</button>
+            <button class="wf-arrow" aria-label="Next">→</button>
+          </div>
+        </div>
+        <div class="wf-scroller">
+          <a class="wf-card media" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="body">
+              <span class="wf-tag">SaaS · Web design</span>
+              <h3>Client name: how they cut onboarding time in half</h3>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+          <a class="wf-card media" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="body">
+              <span class="wf-tag">E-commerce · Copy & design</span>
+              <h3>Client name: a new product page that lifted conversion</h3>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+          <a class="wf-card media" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="body">
+              <span class="wf-tag">Health · Development</span>
+              <h3>Client name: a booking flow patients finish on mobile</h3>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+          <a class="wf-card media" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="body">
+              <span class="wf-tag">Transportation · Brand</span>
+              <h3>Client name: one brand across 14 regional sites</h3>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+          <a class="wf-card media" href="#">
+            <div class="wf-img" role="img" aria-label="Case study image">
+            </div>
+            <div class="body">
+              <span class="wf-tag">Tech · Copy</span>
+              <h3>Client name: a pricing page sales teams actually use</h3>
+              <span class="wf-small wf-muted">Read case study →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </Fragment>
+  )}
+</section>

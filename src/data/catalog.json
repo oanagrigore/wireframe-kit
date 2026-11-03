@@ -1,0 +1,152 @@
+[
+  {
+    "type": "nav",
+    "name": "Navbar",
+    "variants": {
+      "simple": "Simple",
+      "split": "Links left",
+      "centered": "Centered logo",
+      "stacked": "Stacked",
+      "floating": "Floating bar",
+      "minimal": "Minimal menu"
+    },
+    "label": "Navbar"
+  },
+  {
+    "type": "hero",
+    "name": "Hero",
+    "variants": {
+      "split": "Split",
+      "split-reverse": "Split, image left",
+      "centered": "Centered",
+      "image-below": "Image below",
+      "video": "Video",
+      "cover": "Cover image",
+      "statement": "Statement",
+      "form": "Email capture"
+    },
+    "label": "Hero"
+  },
+  {
+    "type": "logos",
+    "name": "LogoCloud",
+    "variants": {
+      "row": "Row",
+      "inline": "Caption left",
+      "boxed": "Boxed grid",
+      "divided": "Divided grid"
+    },
+    "label": "Logo cloud"
+  },
+  {
+    "type": "features",
+    "name": "Features",
+    "variants": {
+      "grid-3": "3-column cards",
+      "grid-2": "2-column cards",
+      "icons-4": "4 icons, no cards",
+      "bento": "Bento",
+      "list": "Icon list",
+      "zigzag": "Alternating rows",
+      "steps": "Steps",
+      "tabs": "Tabs"
+    },
+    "label": "Features"
+  },
+  {
+    "type": "split",
+    "name": "FeatureSplit",
+    "variants": {
+      "image-left": "Image left",
+      "image-right": "Image right",
+      "framed": "Framed image",
+      "with-stats": "With stats",
+      "stacked": "Text above image"
+    },
+    "label": "Feature split"
+  },
+  {
+    "type": "stats",
+    "name": "Stats",
+    "variants": {
+      "header": "Header + stats",
+      "row": "Stats only",
+      "split": "Header left",
+      "cards": "Cards",
+      "big": "Big numbers"
+    },
+    "label": "Stats"
+  },
+  {
+    "type": "cards",
+    "name": "CaseStudies",
+    "variants": {
+      "grid-3": "3 cards",
+      "grid-2": "2 cards",
+      "featured": "Featured + list",
+      "list": "Rows",
+      "carousel": "Carousel"
+    },
+    "label": "Case studies"
+  },
+  {
+    "type": "testimonials",
+    "name": "Testimonials",
+    "variants": {
+      "grid": "Grid",
+      "single": "Single quote",
+      "split": "Quote + image",
+      "wall": "Wall",
+      "logos": "With logos"
+    },
+    "label": "Testimonials"
+  },
+  {
+    "type": "pricing",
+    "name": "Pricing",
+    "variants": {
+      "tiers-3": "3 tiers",
+      "toggle": "3 tiers + billing toggle",
+      "tiers-2": "2 tiers",
+      "single": "Single plan",
+      "table": "Comparison table"
+    },
+    "label": "Pricing"
+  },
+  {
+    "type": "faq",
+    "name": "Faq",
+    "variants": {
+      "two-col": "Two column",
+      "accordion": "Accordion",
+      "accordion-split": "Accordion + contact",
+      "grid": "Grid"
+    },
+    "label": "FAQ"
+  },
+  {
+    "type": "cta",
+    "name": "CallToAction",
+    "variants": {
+      "band": "Band",
+      "centered": "Centered",
+      "split": "Split with image",
+      "newsletter": "Newsletter",
+      "cover": "Cover image",
+      "inline": "Inline bar"
+    },
+    "label": "Call to action"
+  },
+  {
+    "type": "footer",
+    "name": "Footer",
+    "variants": {
+      "columns": "Columns",
+      "simple": "Simple",
+      "centered": "Centered",
+      "newsletter": "Newsletter",
+      "big": "Big wordmark"
+    },
+    "label": "Footer"
+  }
+]

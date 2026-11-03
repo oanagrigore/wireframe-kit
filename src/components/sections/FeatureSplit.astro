@@ -1,0 +1,122 @@
+---
+/**
+ * Feature split — 5 layouts.
+ *   image-left       Image left
+ *   image-right      Image right
+ *   framed           Framed image
+ *   with-stats       With stats
+ *   stacked          Text above image
+ *
+ * Props: variant, tone ('base' | 'muted' | 'primary').
+ * Styles come from src/styles/wireframe.css and the tokens on the parent .wf element.
+ */
+export type FeatureSplitVariant = 'image-left' | 'image-right' | 'framed' | 'with-stats' | 'stacked';
+interface Props {
+  variant?: FeatureSplitVariant;
+  tone?: 'base' | 'muted' | 'primary';
+}
+const { variant = 'image-left', tone = 'base' } = Astro.props;
+---
+<section class:list={['wf-sec', tone !== 'base' && `tone-${tone}`]} data-type="split" data-variant={variant}>
+  {variant === 'image-left' && (
+    <Fragment>
+      <div class="wf-in wf-split">
+        <div class="wf-img" role="img" aria-label="Feature image">
+        </div>
+        <div class="wf-stack">
+          <span class="wf-eyebrow">How it works</span>
+          <h2>Show one feature in the context it’s used</h2>
+          <p class="wf-lead">Explain the before and after. Keep it to the one job this feature does well.</p>
+          <ul class="wf-checks">
+            <li>First concrete benefit</li>
+            <li>Second concrete benefit</li>
+            <li>Third concrete benefit</li>
+          </ul>
+          <div class="wf-btns">
+            <a class="wf-btn wf-btn-secondary" href="#">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'image-right' && (
+    <Fragment>
+      <div class="wf-in wf-split rev">
+        <div class="wf-img" role="img" aria-label="Feature image">
+        </div>
+        <div class="wf-stack">
+          <span class="wf-eyebrow">How it works</span>
+          <h2>Show one feature in the context it’s used</h2>
+          <p class="wf-lead">Explain the before and after. Keep it to the one job this feature does well.</p>
+          <ul class="wf-checks">
+            <li>First concrete benefit</li>
+            <li>Second concrete benefit</li>
+            <li>Third concrete benefit</li>
+          </ul>
+          <div class="wf-btns">
+            <a class="wf-btn wf-btn-secondary" href="#">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'framed' && (
+    <Fragment>
+      <div class="wf-in wf-split">
+        <div class="wf-frame">
+          <div class="wf-img" role="img" aria-label="Feature image">
+          </div>
+        </div>
+        <div class="wf-stack">
+          <span class="wf-eyebrow">How it works</span>
+          <h2>Show one feature in the context it’s used</h2>
+          <p class="wf-lead">Explain the before and after. Keep it to the one job this feature does well.</p>
+          <ul class="wf-checks">
+            <li>First concrete benefit</li>
+            <li>Second concrete benefit</li>
+            <li>Third concrete benefit</li>
+          </ul>
+          <div class="wf-btns">
+            <a class="wf-btn wf-btn-secondary" href="#">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'with-stats' && (
+    <Fragment>
+      <div class="wf-in wf-split rev">
+        <div class="wf-img" role="img" aria-label="Feature image">
+        </div>
+        <div class="wf-stack">
+          <span class="wf-eyebrow">Why it works</span>
+          <h2>Back the feature with two numbers</h2>
+          <p class="wf-lead">Explain the result, then let the figures carry the proof. Example figures shown.</p>
+          <div class="wf-ministats">
+            <div>
+              <span class="wf-num">2×</span>
+              <span class="wf-muted wf-small">Faster reviews</span>
+            </div>
+            <div>
+              <span class="wf-num">-35%</span>
+              <span class="wf-muted wf-small">Fewer revision rounds</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  )}
+  {variant === 'stacked' && (
+    <Fragment>
+      <div class="wf-in">
+        <div class="wf-head center">
+          <span class="wf-eyebrow">How it works</span>
+          <h2>Show one feature in the context it’s used</h2>
+          <p class="wf-lead">Explain the before and after. Keep it to the one job this feature does well.</p>
+        </div>
+        <div class="wf-img" role="img" aria-label="Wide feature image">
+        </div>
+      </div>
+    </Fragment>
+  )}
+</section>

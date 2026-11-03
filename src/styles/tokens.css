@@ -1,0 +1,11 @@
+/* Starting tokens for .wf. Export your own from the editor ("Export Astro page" carries them inline). */
+.wf {
+  --bg: #ffffff; --fg: #09090b; --primary: #18181b; --pfg: #fafafa;
+  --muted: #f4f4f5; --muted-fg: #52525b; --border: #e4e4e7; --card: #ffffff;
+  --r: 8px; --bw: 1px; --btn-r: 8px; --shadow: none;
+  --sec-y: 96px; --sec-y-m: 58px; --container: 1280px; --gutter: 32px; --gutter-m: 16px; --gap: 24px; --card-pad: 24px;
+  --fh: "Geist", system-ui, sans-serif; --fb: "Geist", system-ui, sans-serif;
+  --base: 16px; --lh: 1.6; --hw: 600; --tr: -0.02em;
+  --h1: 61px; --h2: 39px; --h3: 21px; --lead: 18px; --h1m: 39px; --h2m: 31px;
+  --img-ratio: 16 / 9;
+}

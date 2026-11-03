@@ -1,0 +1,32 @@
+---
+/**
+ * The same components used in a plain Astro page, with no editor.
+ * This is all you need in your own project: the section components, wireframe.css and tokens.css.
+ */
+import { Navbar, Hero, LogoCloud, Features, FeatureSplit, Stats, Pricing, Faq, CallToAction, Footer } from '../components/sections';
+import '../styles/wireframe.css';
+
+import '../styles/tokens.css';
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Example page · Wireframe Kit</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&display=swap" />
+  </head>
+  <body style="margin:0">
+    <div class="wf img-hatch">
+      <Navbar variant="split" />
+      <Hero variant="image-below" />
+      <LogoCloud variant="row" tone="muted" />
+      <Features variant="bento" />
+      <FeatureSplit variant="with-stats" />
+      <Stats variant="cards" tone="muted" />
+      <Pricing variant="table" />
+      <Faq variant="accordion" />
+      <CallToAction variant="band" />
+      <Footer variant="columns" />
+    </div>
+  </body>
+</html>
