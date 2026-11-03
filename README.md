@@ -1,6 +1,12 @@
 # Wireframe Kit
 
-Wireframes usually live in a design tool, far from the browser, so layout and responsive questions get answered late. This kit puts them in the browser from the first sketch: pick sections, theme them, check contrast, and hand off real Astro components.
+A visual page builder for the people who shape a page before a designer gets to it: copywriters, product managers, founders. Copy written in a doc hides its structure. You don't see that the headline wraps to four lines, that the pricing needs a third plan, or that the FAQ belongs above the testimonials. This kit lets you put your words and your page order into real, responsive sections in minutes, try several versions, and hand the designer a clear starting point.
+
+It doesn't replace design. Wireframing and design still happen; they just start from a page whose story has already been tested, instead of from lorem ipsum.
+
+**Who it's for:** copywriters testing message order and length, PMs sketching a launch page or feature page, founders explaining what they want, and designers who want a faster first pass with their copywriter.
+
+The placeholder copy in every section is a brief, not filler: each line says what belongs there ("Headline that names the outcome your customer wants").
 
 **Try it:** [ogrigore.design/lab/wireframe-kit](https://ogrigore.design/lab/wireframe-kit)
 
