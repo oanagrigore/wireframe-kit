@@ -149,3 +149,12 @@ button,select,input{font:inherit;color:inherit}
 body{margin:0}img{max-width:100%}[hidden]{display:none!important}
 .brand .crumb{color:var(--ui-sub);text-decoration:none;font-weight:400}
 .brand .crumb:hover{color:var(--ui-ink);text-decoration:underline}
+
+/* inline copy editing */
+.edit-hint{color:var(--ui-sub);font-size:12px;white-space:nowrap}
+@media (max-width:1100px){.edit-hint{display:none}}
+.wf [data-e]{cursor:text;border-radius:2px}
+.wf [data-e]:hover{outline:1px dashed var(--ui-accent);outline-offset:3px}
+.wf [data-e]:focus{outline:2px solid var(--ui-accent);outline-offset:3px}
+.wf [data-e]:empty{display:inline-block;min-width:3ch}
+.wf [data-e]:empty::before{content:"Add text";opacity:.45}

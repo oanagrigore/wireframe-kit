@@ -83,11 +83,41 @@ let SEC = load('wfk-sections',null) || DEFAULT_SECTIONS;
 
 
 const TEMPLATES = new Map([...document.querySelectorAll('template[data-wf]')].map(t => [t.dataset.wf, t]));
-function sectionHTML(s){
+/* ---------- editable copy ----------
+   Every piece of text in a section is one "unit", numbered in document order.
+   Edits are saved per section and per layout: s.copy[variant][unitIndex] = text. */
+const NOT_COPY = 'button, svg, .sec-tools';
+const hasOwnText = el => [...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim());
+function textUnits(root){
+  // Mixed content (e.g. "€29<small> / month</small>") gets its loose text wrapped,
+  // so every unit is an element with text and no child elements.
+  for (const el of [root, ...root.querySelectorAll('*')]) {
+    if (el.closest(NOT_COPY) || !el.children.length || !hasOwnText(el)) continue;
+    for (const n of [...el.childNodes]) {
+      if (n.nodeType !== 3 || !n.textContent.trim()) continue;
+      const sp = document.createElement('span'); sp.className = 'wf-t'; n.replaceWith(sp); sp.append(n);
+    }
+  }
+  return [root, ...root.querySelectorAll('*')].filter(el => !el.closest(NOT_COPY) && !el.children.length && hasOwnText(el));
+}
+const CE_MODE = (() => { const d = document.createElement('div'); try { d.contentEditable = 'plaintext-only'; return 'plaintext-only'; } catch { return 'true'; } })();
+const editedCopy = s => (s.copy && s.copy[s.variant]) || null;
+function sectionEl(s, editable = false){
   const tpl = TEMPLATES.get(s.type + ':' + s.variant) || TEMPLATES.get(s.type + ':' + Object.keys(TYPES[s.type].v)[0]);
   const el = tpl.content.firstElementChild.cloneNode(true);
   if (s.tone && s.tone !== 'base') el.classList.add('tone-' + s.tone);
-  return el.outerHTML;
+  const copy = editedCopy(s);
+  textUnits(el).forEach((u, i) => {
+    if (copy && copy[i] != null) u.textContent = copy[i];
+    if (editable) { u.dataset.e = i; u.setAttribute('contenteditable', CE_MODE); u.spellcheck = true; }
+  });
+  return el;
+}
+function sectionHTML(s, editable = false){ return sectionEl(s, editable).outerHTML; }
+function cleanForExport(root){
+  root.querySelectorAll('.sec-tools').forEach(n => n.remove());
+  root.querySelectorAll('[data-e]').forEach(n => { n.removeAttribute('data-e'); n.removeAttribute('contenteditable'); n.removeAttribute('spellcheck'); });
+  return root;
 }
 
 /* ---------- icons ---------- */
@@ -97,6 +127,7 @@ const I = {
   variant:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="5" height="10" rx="1"/><rect x="9" y="3" width="5" height="4" rx="1"/><rect x="9" y="9" width="5" height="4" rx="1"/></svg>',
   tone:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="5.5"/><path d="M8 2.5v11A5.5 5.5 0 0 0 8 2.5z" fill="currentColor"/></svg>',
   dup:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 10.5V4a1 1 0 0 1 1-1h6.5"/></svg>',
+  text:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3.5 8a4.5 4.5 0 1 0 1.3-3.2M3.5 3v2.6h2.6"/></svg>',
   del:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.6 8.5h5.8l.6-8.5"/></svg>'
 };
 
@@ -129,13 +160,15 @@ function applyVars(){
 
 function renderSections(){
   wf.innerHTML = SEC.map((s,i)=>{
-    const html = sectionHTML(s);
+    const html = sectionHTML(s, true);
+    const edited = !!(editedCopy(s) && Object.keys(editedCopy(s)).length);
     const tools = `<div class="sec-tools"><span class="tag">${TYPES[s.type].l} · ${TYPES[s.type].v[s.variant]}</span>
       <button class="ib" data-act="up" data-i="${i}" ${i===0?'disabled':''} title="Move up" aria-label="Move up">${I.up}</button>
       <button class="ib" data-act="down" data-i="${i}" ${i===SEC.length-1?'disabled':''} title="Move down" aria-label="Move down">${I.down}</button>
       <button class="ib" data-act="pick" data-i="${i}" title="Choose layout (${Object.keys(TYPES[s.type].v).length})" aria-label="Choose layout">${I.variant}</button>
       <button class="ib" data-act="tone" data-i="${i}" title="Background: ${TONES[s.tone]}" aria-label="Change background">${I.tone}</button>
       <button class="ib" data-act="dup" data-i="${i}" title="Duplicate" aria-label="Duplicate">${I.dup}</button>
+      <button class="ib" data-act="text" data-i="${i}" ${edited?'':'disabled'} title="Restore the original text" aria-label="Restore the original text">${I.text}</button>
       <button class="ib" data-act="del" data-i="${i}" title="Remove" aria-label="Remove">${I.del}</button></div>`;
     return html.replace(/(<(section|header|footer)[^>]*>)/, `$1${tools}`);
   }).join('') || `<div style="padding:80px 24px;text-align:center;color:var(--muted-fg)">No sections yet. Add one from the Sections tab.</div>`;
@@ -150,13 +183,39 @@ function act(a,i){
   if(a==='down'&&i<SEC.length-1)[SEC[i+1],SEC[i]]=[SEC[i],SEC[i+1]];
   if(a==='variant'){const vs=Object.keys(TYPES[s.type].v);s.variant=vs[(vs.indexOf(s.variant)+1)%vs.length]}
   if(a==='tone'){const ts=Object.keys(TONES);s.tone=ts[(ts.indexOf(s.tone)+1)%ts.length]}
-  if(a==='dup')SEC.splice(i+1,0,{...s,id:uid()});
+  if(a==='dup')SEC.splice(i+1,0,{...s,id:uid(),copy:JSON.parse(JSON.stringify(s.copy||{}))});
+  if(a==='text'){if(s.copy)delete s.copy[s.variant];toast('Original text restored')}
   if(a==='del')SEC.splice(i,1);
   renderSections();save();
 }
 wf.addEventListener('click',e=>{
   const b=e.target.closest('[data-act]'); if(b){e.preventDefault();act(b.dataset.act,+b.dataset.i);return}
   if(e.target.closest('a'))e.preventDefault();
+  // An open accordion question is edited on click; a closed one opens first.
+  const sum=e.target.closest('summary');
+  if(sum&&sum.parentElement.open&&e.target.closest('[data-e]'))e.preventDefault();
+});
+let copySaveT;
+function sectionIndexOf(el){return [...wf.children].indexOf(el.closest('.wf-sec'))}
+wf.addEventListener('input',e=>{
+  const u=e.target.closest&&e.target.closest('[data-e]'); if(!u) return;
+  const i=sectionIndexOf(u), s=SEC[i]; if(!s) return;
+  s.copy=s.copy||{}; const c=s.copy[s.variant]=s.copy[s.variant]||{};
+  c[u.dataset.e]=u.textContent;
+  const tool=wf.children[i].querySelector('.sec-tools [data-act="text"]'); if(tool)tool.disabled=false;
+  clearTimeout(copySaveT); copySaveT=setTimeout(()=>{save();renderSectionList()},400);
+  scheduleA11y();
+});
+wf.addEventListener('keydown',e=>{
+  const u=e.target.closest&&e.target.closest('[data-e]'); if(!u) return;
+  if(e.key==='Enter'||e.key==='Escape'){e.preventDefault();u.blur();return}
+  if(e.key===' '&&u.closest('summary')){e.preventDefault();document.execCommand('insertText',false,' ')}
+});
+wf.addEventListener('keyup',e=>{if(e.key===' '&&e.target.closest&&e.target.closest('summary [data-e], summary[data-e]'))e.preventDefault()});
+wf.addEventListener('paste',e=>{
+  const u=e.target.closest&&e.target.closest('[data-e]'); if(!u) return;
+  e.preventDefault();
+  document.execCommand('insertText',false,(e.clipboardData||window.clipboardData).getData('text/plain').replace(/\s+/g,' ').trim());
 });
 
 /* ---------- theme panel ---------- */
@@ -198,9 +257,9 @@ paneTheme.addEventListener('click',e=>{
 /* ---------- sections panel ---------- */
 const paneSec = document.getElementById('pane-sections');
 function renderSectionList(){
-  paneSec.innerHTML = `<div class="group"><h3>Add section</h3><div class="addrow"><select id="addType" aria-label="Section type">${Object.entries(TYPES).map(([k,t])=>`<option value="${k}">${t.l}</option>`).join('')}</select><button class="btn pri" id="addBtn">Choose layout</button></div><p class="hint">Pick a layout to add it above the footer. Hover a section in the preview for quick controls.</p></div>
+  paneSec.innerHTML = `<div class="group"><h3>Add section</h3><div class="addrow"><select id="addType" aria-label="Section type">${Object.entries(TYPES).map(([k,t])=>`<option value="${k}">${t.l}</option>`).join('')}</select><button class="btn pri" id="addBtn">Choose layout</button></div><p class="hint">Pick a layout to add it above the footer. Click any text in the preview to rewrite it; your text is kept per layout, so you can switch layouts and come back. Hover a section for quick controls.</p></div>
   <div class="group"><h3>Page · ${SEC.length} sections</h3><div class="slist">${SEC.map((s,i)=>`<div class="sitem">
-    <div class="name">${TYPES[s.type].l}<span>#${i+1}</span></div>
+    <div class="name">${TYPES[s.type].l}<span>#${i+1}${editedCopy(s)&&Object.keys(editedCopy(s)).length?' · text edited':''}</span></div>
     <div class="ctl"><button class="ib" data-act="pick" data-i="${i}" aria-label="Browse layouts" title="Browse layouts">${I.variant}</button><button class="ib" data-act="up" data-i="${i}" ${i===0?'disabled':''} aria-label="Move up">${I.up}</button><button class="ib" data-act="down" data-i="${i}" ${i===SEC.length-1?'disabled':''} aria-label="Move down">${I.down}</button><button class="ib" data-act="dup" data-i="${i}" aria-label="Duplicate">${I.dup}</button><button class="ib" data-act="del" data-i="${i}" aria-label="Remove">${I.del}</button></div>
     <div class="sel"><select id="v-${s.id}" data-set="variant" data-i="${i}" aria-label="Layout">${Object.entries(TYPES[s.type].v).map(([v,l])=>`<option value="${v}"${s.variant===v?' selected':''}>${l}</option>`).join('')}</select><select id="t-${s.id}" data-set="tone" data-i="${i}" aria-label="Background">${Object.entries(TONES).map(([v,l])=>`<option value="${v}"${s.tone===v?' selected':''}>${l} bg</option>`).join('')}</select></div>
   </div>`).join('')}</div></div>
@@ -433,7 +492,7 @@ function tokensCSS(){
 }
 function pageHTML(){
   const clone = wf.cloneNode(true);
-  clone.querySelectorAll('.sec-tools').forEach(n=>n.remove());
+  cleanForExport(clone);
   clone.removeAttribute('id');
   const vars = wf.getAttribute('style').split(';').map(x=>x.trim()).filter(Boolean).join(';\n  ');
   const fams = [...new Set([S.fh,S.fb])].filter(f=>f!=='System UI').map(f=>'family='+f.replace(/ /g,'+')+(f==='Instrument Serif'?'':':wght@300..800')).join('&');
@@ -461,15 +520,21 @@ ${body}
 }
 const COMPONENTS = {nav:'Navbar',hero:'Hero',logos:'LogoCloud',features:'Features',split:'FeatureSplit',stats:'Stats',cards:'CaseStudies',testimonials:'Testimonials',pricing:'Pricing',faq:'Faq',cta:'CallToAction',footer:'Footer'};
 function astroPage(){
-  const used=[...new Set(SEC.map(s=>COMPONENTS[s.type]))];
+  const isEdited=s=>!!(editedCopy(s)&&Object.keys(editedCopy(s)).length);
+  const used=[...new Set(SEC.filter(s=>!isEdited(s)).map(s=>COMPONENTS[s.type]))];
   const vars=wf.getAttribute('style').split(';').map(x=>x.trim()).filter(Boolean).join('; ');
   const fams=[...new Set([S.fh,S.fb])].filter(f=>f!=='System UI').map(f=>'family='+f.replace(/ /g,'+')+(f==='Instrument Serif'?'':':wght@300..800')).join('&');
-  const lines=SEC.map(s=>`    <${COMPONENTS[s.type]} variant="${s.variant}"${s.tone&&s.tone!=='base'?` tone="${s.tone}"`:''} />`);
+  const esc=t=>t.replace(/\{/g,'&#123;').replace(/\}/g,'&#125;');
+  const lines=SEC.map((s,i)=>{
+    if(!isEdited(s)) return `    <${COMPONENTS[s.type]} variant="${s.variant}"${s.tone&&s.tone!=='base'?` tone="${s.tone}"`:''} />`;
+    const el=cleanForExport(wf.children[i].cloneNode(true));
+    const markup=esc(el.outerHTML).replace(/>\s*</g,'>\n<').split('\n').map(l=>'    '+l).join('\n');
+    return `    <!-- ${TYPES[s.type].l} · ${TYPES[s.type].v[s.variant]}: your copy, inlined. Same markup as <${COMPONENTS[s.type]} variant="${s.variant}" />. -->\n${markup}`;
+  });
   return `---
 // src/pages/index.astro — copy src/components/sections and src/styles/wireframe.css
 // from github.com/oanagrigore/wireframe-kit into your project first.
-import { ${used.join(', ')} } from '../components/sections';
-import '../styles/wireframe.css';
+${used.length?`import { ${used.join(', ')} } from '../components/sections';\n`:''}import '../styles/wireframe.css';
 ---
 <html lang="en">
   <head>
@@ -484,7 +549,41 @@ ${lines.join('\n')}
   </body>
 </html>`;
 }
-document.getElementById('exportAstro').onclick=()=>openModal('Astro page',astroPage(),'Each section is an Astro component with variant and tone props. The style attribute carries your theme tokens; move them to a stylesheet when you build for real.');
+/* Copy deck: every line of text on the page, in order, labelled by what it is. */
+function copyRole(u){
+  const el=u.classList.contains('wf-t')?u.parentElement:u;
+  const m=sel=>el.matches(sel)||u.matches(sel);
+  if(m('h1'))return 'Headline';
+  if(m('h2'))return 'Section headline';
+  if(m('summary'))return 'Question';
+  if(m('h3,h4'))return 'Subhead';
+  if(m('.wf-eyebrow'))return 'Eyebrow';
+  if(m('.wf-btn'))return 'Button';
+  if(m('.wf-num'))return 'Stat';
+  if(m('.wf-quote,.wf-big-quote'))return 'Quote';
+  if(m('.wf-lead'))return 'Intro';
+  if(m('.wf-tag,.wf-badge'))return 'Label';
+  if(m('.wf-price, .wf-price *, .wf-price-s'))return 'Price';
+  if(m('.wf-input'))return 'Field';
+  if(m('th, th *, td'))return 'Table';
+  if(m('b'))return 'Name';
+  if(m('.wf-logo'))return 'Logo';
+  if(m('a'))return 'Link';
+  if(m('li, li *'))return 'List item';
+  return 'Text';
+}
+function copyDeck(){
+  const out=['# Page copy',''];
+  [...wf.children].forEach((sec,i)=>{
+    const s=SEC[i]; if(!s) return;
+    out.push(`## ${i+1}. ${TYPES[s.type].l} · ${TYPES[s.type].v[s.variant]}`,'');
+    sec.querySelectorAll('[data-e]').forEach(u=>{const t=u.textContent.trim(); if(t)out.push(`- **${copyRole(u)}:** ${t}`)});
+    out.push('');
+  });
+  return out.join('\n').trim()+'\n';
+}
+document.getElementById('exportCopy').onclick=()=>openModal('Page copy',copyDeck(),'Every line of text on the page, in order, labelled by role. Paste it into a doc for review, or into your CMS.');
+document.getElementById('exportAstro').onclick=()=>openModal('Astro page',astroPage(),'Untouched sections are Astro components with variant and tone props. Sections where you changed the text are inlined as markup with your copy. The style attribute carries your theme tokens.');
 const modal=document.getElementById('modal'),mText=document.getElementById('mText');
 function openModal(title,text,note){document.getElementById('mTitle').textContent=title;mText.value=text;document.getElementById('mNote').textContent=note;modal.hidden=false;mText.scrollTop=0;document.getElementById('mCopy').focus()}
 document.getElementById('exportCss').onclick=()=>openModal('Design tokens',tokensCSS(),'Variable names match shadcn/ui, so components pick up colors and radius right away. Layout and type tokens are extras.');

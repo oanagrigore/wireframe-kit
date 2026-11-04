@@ -13,11 +13,12 @@ The placeholder copy in every section is a brief, not filler: each line says wha
 ## What's in it
 
 - **66 section layouts as Astro components**, across 12 section types: navbar, hero, logo cloud, features, feature split, stats, case studies, testimonials, pricing, FAQ, call to action and footer. Each component takes a `variant` and a `tone` prop.
+- **Write in place.** Click any text in the preview and type over it: headlines, buttons, prices, FAQ questions, quotes. Your copy is saved per section and per layout, so you can try a layout, switch, and come back without losing it. A restore button brings back the original prompt text.
 - **A browser editor** to build a page from those components, with a visual layout picker, move up and down controls, duplicate and per-section tone.
 - **Theme controls** for colors, radius, border width, button shape, shadows, spacing, max width, gutters, card padding, fonts, type scale, weights, tracking and placeholder images, plus six presets.
 - **Responsive preview** at desktop, tablet (834px) and mobile (390px). Sections use container queries, so they respond to the preview width.
 - **Accessibility check** against WCAG 2.2 AA on every change: 8 theme color pairs with a Fix button, plus a scan of every visible text element against its real background.
-- **Exports:** design tokens as CSS variables with shadcn/ui names (plus a Tailwind v4 `@theme` block), a standalone HTML page, or an Astro page that imports the components.
+- **Exports:** a copy deck (every line of text on the page, in order and labelled: headline, button, question…) for review in a doc, design tokens as CSS variables with shadcn/ui names (plus a Tailwind v4 `@theme` block), a standalone HTML page with your copy, or an Astro page that imports the components (sections with your own copy are inlined as markup).
 
 ## Use the components in your own Astro project
 
