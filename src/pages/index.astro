@@ -24,7 +24,7 @@ import '../styles/editor.css';
 <body>
 <div class="app">
   <div class="topbar">
-    <div class="brand"><i></i><span><a class="crumb" href="https://ogrigore.design">Oana Grigore</a> / Wireframe Kit</span></div>
+    <div class="brand"><span><a class="crumb" href="https://ogrigore.design">Oana Grigore</a> / Wireframe Kit</span></div>
     <div class="seg" role="group" aria-label="Preview width">
       <button data-vp="desktop" aria-pressed="true">Desktop<span class="w">fluid</span></button>
       <button data-vp="tablet" aria-pressed="false">Tablet<span class="w">834</span></button>
@@ -32,9 +32,14 @@ import '../styles/editor.css';
     </div>
     <button class="btn a11y-pill" id="a11yBtn" data-state=""><i></i><span>Checking contrast</span></button>
     <span class="edit-hint">Click any text to edit it</span>
-    <button class="btn" id="exportCopy">Export copy</button>
-    <button class="btn" id="exportCss">Export tokens</button>
-    <button class="btn" id="exportHtml">Export HTML</button>
+    <div class="menu" id="moreMenu">
+      <button class="btn menu-btn" id="moreBtn" aria-expanded="false" aria-controls="moreList">More exports<span class="chev" aria-hidden="true"></span></button>
+      <div class="menu-list" id="moreList" hidden>
+        <button class="menu-item" id="exportCopy">Copy deck<small>Every line of text, labelled</small></button>
+        <button class="menu-item" id="exportCss">Design tokens<small>CSS variables + Tailwind</small></button>
+        <button class="menu-item" id="exportHtml">HTML page<small>Standalone, with your copy</small></button>
+      </div>
+    </div>
     <button class="btn pri" id="exportAstro">Export Astro page</button>
   </div>
 

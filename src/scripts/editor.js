@@ -584,6 +584,24 @@ function copyDeck(){
 }
 document.getElementById('exportCopy').onclick=()=>openModal('Page copy',copyDeck(),'Every line of text on the page, in order, labelled by role. Paste it into a doc for review, or into your CMS.');
 document.getElementById('exportAstro').onclick=()=>openModal('Astro page',astroPage(),'Untouched sections are Astro components with variant and tone props. Sections where you changed the text are inlined as markup with your copy. The style attribute carries your theme tokens.');
+/* ---------- "More exports" menu ---------- */
+const moreBtn=document.getElementById('moreBtn'),moreList=document.getElementById('moreList');
+const moreItems=()=>[...moreList.querySelectorAll('.menu-item')];
+function setMenu(open,focusFirst){
+  moreList.hidden=!open; moreBtn.setAttribute('aria-expanded',String(open));
+  if(open&&focusFirst)moreItems()[0].focus();
+}
+moreBtn.addEventListener('click',()=>setMenu(moreList.hidden,false));
+moreBtn.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();setMenu(true,true)}});
+moreList.addEventListener('click',e=>{if(e.target.closest('.menu-item'))setMenu(false)});
+moreList.addEventListener('keydown',e=>{
+  const items=moreItems(),i=items.indexOf(document.activeElement);
+  if(e.key==='ArrowDown'){e.preventDefault();items[(i+1)%items.length].focus()}
+  if(e.key==='ArrowUp'){e.preventDefault();items[(i-1+items.length)%items.length].focus()}
+  if(e.key==='Escape'){e.preventDefault();setMenu(false);moreBtn.focus()}
+});
+document.addEventListener('click',e=>{if(!moreList.hidden&&!e.target.closest('#moreMenu'))setMenu(false)});
+document.getElementById('moreMenu').addEventListener('focusout',e=>{if(!e.currentTarget.contains(e.relatedTarget)&&e.relatedTarget)setMenu(false)});
 const modal=document.getElementById('modal'),mText=document.getElementById('mText');
 function openModal(title,text,note){document.getElementById('mTitle').textContent=title;mText.value=text;document.getElementById('mNote').textContent=note;modal.hidden=false;mText.scrollTop=0;document.getElementById('mCopy').focus()}
 document.getElementById('exportCss').onclick=()=>openModal('Design tokens',tokensCSS(),'Variable names match shadcn/ui, so components pick up colors and radius right away. Layout and type tokens are extras.');
