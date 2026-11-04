@@ -6,8 +6,8 @@
   "description": "Responsive website wireframes from 66 Astro section components, with a browser editor, live WCAG 2.2 AA contrast checks and token export.",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "astro build && node scripts/nest-output.mjs",
+    "preview": "npx serve dist"
   },
   "dependencies": {
     "astro": "^5.0.0"

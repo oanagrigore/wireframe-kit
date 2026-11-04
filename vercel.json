@@ -1,6 +1,6 @@
 {
-  "rewrites": [
-    { "source": "/lab/wireframe-kit", "destination": "/" },
-    { "source": "/lab/wireframe-kit/:path*", "destination": "/:path*" }
-  ]
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true
 }

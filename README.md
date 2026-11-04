@@ -47,7 +47,7 @@ npm install
 npm run dev
 ```
 
-Then open the URL Astro prints (the site runs under `/lab/wireframe-kit`, set in `astro.config.mjs`).
+Then open the URL Astro prints. The site runs under `/lab/wireframe-kit` (set in `astro.config.mjs`), and `npm run build` nests the output in `dist/lab/wireframe-kit` so the files sit at the path they are served from.
 
 ## How it's built
 
